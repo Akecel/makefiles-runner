@@ -10,6 +10,10 @@
 
 //TODO
 
+## Usage
+
+//TODO
+
 ## Authors
 
 * [**Akecel**](https://github.com/Akecel) - *Extension author*
