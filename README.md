@@ -1,4 +1,4 @@
-# Makefiles-Runner for VsCode (WIP)
+# Makefiles-Runner for VsCode
 
 [![](https://vsmarketplacebadge.apphb.com/version-short/akecel.makefiles-runner.svg)](https://marketplace.visualstudio.com/items?itemName=akecel.makefiles-runner)
 ![Licence](https://img.shields.io/badge/License-MIT-blue.svg)
