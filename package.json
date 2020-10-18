@@ -1,6 +1,6 @@
 {
 	"name": "makefiles-runner",
-	"displayName": "makefiles-runner",
+	"displayName": "Makefiles Runner",
 	"description": "Make runner for VsCode. Simplify your development by easily running your makefiles commands directly from your IDE interface. ",
 	"version": "1.0.1",
 	"publisher": "akecel",
