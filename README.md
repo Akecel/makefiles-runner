@@ -1,4 +1,4 @@
-# Makefiles-Runner for VsCode
+# Makefiles-Runner for VsCode (WIP)
 
 >Make runner for VsCode. Simplify your development by easily running your makefiles commands directly from your IDE interface. 
 
@@ -17,8 +17,6 @@
 ## Authors
 
 * [**Akecel**](https://github.com/Akecel) - *Extension author*
-
-See also the list of [contributors](https://github.com/Akecel/makefiles-runner/graphs/contributors) who participated in this project.
 
 ## Licence
 
