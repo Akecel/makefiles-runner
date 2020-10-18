@@ -9,17 +9,52 @@
 	"categories": [
 		"Other"
 	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Akecel/makefiles-runner.git"
+	},
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/Akecel/makefiles-runner/issues"
+	},
 	"activationEvents": [
-		"onCommand:makefiles-runner.helloWorld"
+		"onView:makefiles-runner"
 	],
+	"icon": "./assets/icon.png",
 	"main": "./out/extension.js",
 	"contributes": {
-		"commands": [
-			{
-				"command": "makefiles-runner.helloWorld",
-				"title": "Hello World"
+		"configuration": {
+			"type": "object",
+			"title": "Makefiles Runner",
+			"properties": {
+				"makefileCommandRunner.makefilePath": {
+					"type": "string",
+					"default": "local",
+					"description": "Path to a Makefile",
+					"scope": "resource"
+				},
+				"makefileCommandRunner.makefileName": {
+					"type": "string",
+					"default": "Makefile",
+					"description": "Makefile name",
+					"scope": "resource"
+				},
+				"makefileCommandRunner.filePathEnv": {
+					"type": "string",
+					"default": "FILE_PATH",
+					"description": "File path environment varible used to pass down the relative file path",
+					"scope": "resource"
+				}
 			}
-		]
+		},
+		"views": {
+			"explorer": [
+				{
+					"id": "makefiles-runner",
+					"name": "Makefile commands"
+				}
+			]
+		}
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
