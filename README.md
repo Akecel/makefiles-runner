@@ -16,7 +16,7 @@ Makefile allows you to simply run your makefile commands from the side bar panel
 
 After configuring the parameters of the extension you can display the "Makefile Commands" panel and see the list of commands in your Makefile, you just have to click on a command to execute it!  
 
-<br /> <br />
+<br />
 
 ![Usage](./assets/doc/feature.gif)
 
