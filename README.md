@@ -1,5 +1,6 @@
 # Makefiles-Runner for VsCode (WIP)
 
+[![](https://vsmarketplacebadge.apphb.com/version-short/akecel.makefiles-runner.svg)](https://marketplace.visualstudio.com/items?itemName=akecel.makefiles-runner)
 ![Licence](https://img.shields.io/badge/License-MIT-blue.svg)
 
 >Make runner for VsCode. Simplify your development by easily running your makefiles commands directly from your IDE interface.
@@ -9,6 +10,7 @@
 - Create your "Makefile" at the root of your project
 - Show the Makefiles-Runner panel
 - Run any command with one click 🚀
+  
 ## Feature
 
 Makefile allows you to simply run your makefile commands from the side bar panel.
@@ -17,7 +19,7 @@ After configuring the parameters of the extension you can display the "Makefile 
 
 <br />
 
-![Usage](./assets/doc/feature.gif)
+<img src="https://raw.githubusercontent.com/Akecel/makefiles-runner/main/assets/doc/feature.gif" alt="Usage demo" />
 
 ## Authors
 

@@ -3,12 +3,14 @@
 	"displayName": "makefiles-runner",
 	"description": "Make runner for VsCode. Simplify your development by easily running your makefiles commands directly from your IDE interface. ",
 	"version": "0.0.1",
+	"publisher": "akecel",
 	"engines": {
 		"vscode": "^1.50.0"
 	},
 	"categories": [
 		"Other"
 	],
+	"homepage": "https://marketplace.visualstudio.com/items?itemName=akecel.makefiles-runner",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/Akecel/makefiles-runner.git"
@@ -20,7 +22,7 @@
 	"activationEvents": [
 		"onView:makefiles-runner"
 	],
-	"icon": "./assets/icon.png",
+	"icon": "icon.png",
 	"main": "./out/extension.js",
 	"contributes": {
 		"views": {
