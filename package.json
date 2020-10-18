@@ -23,30 +23,6 @@
 	"icon": "./assets/icon.png",
 	"main": "./out/extension.js",
 	"contributes": {
-		"configuration": {
-			"type": "object",
-			"title": "Makefiles Runner",
-			"properties": {
-				"makefileCommandRunner.makefilePath": {
-					"type": "string",
-					"default": "local",
-					"description": "Path to a Makefile",
-					"scope": "resource"
-				},
-				"makefileCommandRunner.makefileName": {
-					"type": "string",
-					"default": "Makefile",
-					"description": "Makefile name",
-					"scope": "resource"
-				},
-				"makefileCommandRunner.filePathEnv": {
-					"type": "string",
-					"default": "FILE_PATH",
-					"description": "File path environment varible used to pass down the relative file path",
-					"scope": "resource"
-				}
-			}
-		},
 		"views": {
 			"explorer": [
 				{

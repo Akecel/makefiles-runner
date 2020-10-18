@@ -15,7 +15,7 @@ const getFileContent = async (filePath: string): Promise<Content> => {
     document = await workspace.openTextDocument(filePath);
   } catch (e) {
     throw new Error(
-      'Makefile cannot be read. Check the Makefile-Runner configuration.'
+      'Makefile cannot be read. Check that your makefile is at the root of your project.'
     );
   }
 

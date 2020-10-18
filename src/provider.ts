@@ -1,13 +1,7 @@
 import { TreeDataProvider, TreeItem, TreeItemCollapsibleState, workspace } from "vscode";
-import { Config } from "./configuration";
 import extractCommands from "./parser";
 
 export default class TaskTreeDataProvider implements TreeDataProvider<TreeItem> {
-  config: Config;
-
-  constructor(config: Config) {
-    this.config = config;
-  }
 
   getTreeItem(item: TreeItem): TreeItem {
     return item;
@@ -17,7 +11,7 @@ export default class TaskTreeDataProvider implements TreeDataProvider<TreeItem> 
     const children: TreeItem[] = [];
 
     if (workspace.rootPath) {
-      const filePath = `${workspace.rootPath}/${this.config.makefilePath}/${this.config.makefileName}`;
+      const filePath = `${workspace.rootPath}/Makefile`;
       const commands = await extractCommands(filePath);
 
       if (commands.length !== 0) {
