@@ -2,7 +2,7 @@
 	"name": "makefiles-runner",
 	"displayName": "Makefiles Runner",
 	"description": "Make runner for VsCode. Simplify your development by easily running your makefiles commands directly from your IDE interface. ",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"publisher": "akecel",
 	"engines": {
 		"vscode": "^1.50.0"
