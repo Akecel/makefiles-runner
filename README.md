@@ -1,6 +1,5 @@
 # Makefiles-Runner for VsCode (WIP)
 
-![Version](https://img.shields.io/github/v/release/Akecel/makefiles-runner.svg)
 ![Licence](https://img.shields.io/badge/License-MIT-blue.svg)
 
 >Make runner for VsCode. Simplify your development by easily running your makefiles commands directly from your IDE interface.
