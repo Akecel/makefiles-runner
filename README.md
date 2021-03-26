@@ -19,6 +19,10 @@ Makefile allows you to simply run your makefile commands from the side bar panel
 
 <img src="https://raw.githubusercontent.com/Akecel/makefiles-runner/main/assets/doc/feature.gif" alt="Usage demo" />
 
+## Contributing
+
+Please read [CONTRIBUTING.md](https://github.com/Akecel/makefiles-runner/tree/main/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
+
 ## Authors
 
 - [**Akecel**](https://github.com/Akecel) - *Extension author*
