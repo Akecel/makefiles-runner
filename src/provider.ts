@@ -10,23 +10,25 @@ export default class TaskTreeDataProvider implements TreeDataProvider<TreeItem> 
   async getChildren(): Promise<TreeItem[]> {
     const children: TreeItem[] = [];
 
-    if (workspace.rootPath) {
-      const filePath = `${workspace.rootPath}/Makefile`;
-      const commands = await extractCommands(filePath);
+    if(workspace.workspaceFolders) {
+      var filePath = `${workspace.workspaceFolders[0].uri.fsPath}/Makefile`;
+      var commands = await extractCommands(filePath);
 
       if (commands.length !== 0) {
-        for (let i = 0; i < commands.length; i++) {
-          children.push(new MakefileCommand(commands[i]));
+        for (let y = 0; y < commands.length; y++) {
+          children.push(new MakefileCommand(commands[y]));
         }
       }
     }
 
     return children;
+
   }
 }
 
 type Label = string;
 export type Argument = Label;
+export type FolderName = string;
 
 class MakefileCommand extends TreeItem {
   constructor(label: Label) {

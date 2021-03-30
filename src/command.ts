@@ -2,14 +2,13 @@ import { workspace } from "vscode";
 import { Argument } from "./provider";
 import { ensureTerminalExists, selectTerminal } from "./terminal";
 
-export const getFilePath = (path: string, workspaceRootPath: string) =>
-  path.split(workspaceRootPath + "/")[1];
-
 export const runMakeCommand = () => async (argument: Argument) => {
-  sendTextsToTerminal([
-    `cd ${workspace.rootPath}/`,
-    `make ${argument}`
-  ]);
+  if(workspace.workspaceFolders) {
+    sendTextsToTerminal([
+      `cd ${workspace.workspaceFolders[0].uri.fsPath}/`,
+      `make ${argument}`
+    ]);
+  }
 };
 
 const sendTextToTerminal = async (text: string) => {
