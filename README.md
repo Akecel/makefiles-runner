@@ -1,8 +1,5 @@
 # Makefiles-Runner for VsCode
 
-[![](https://vsmarketplacebadge.apphb.com/version-short/akecel.makefiles-runner.svg)](https://marketplace.visualstudio.com/items?itemName=akecel.makefiles-runner)
-![Licence](https://img.shields.io/badge/License-MIT-blue.svg)
-
 >Make runner for VsCode. Simplify your development by easily running your makefiles commands directly from your IDE interface.
 
 ## Usage
