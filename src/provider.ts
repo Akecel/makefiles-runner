@@ -1,7 +1,14 @@
-import { TreeDataProvider, TreeItem, TreeItemCollapsibleState, workspace } from "vscode";
+import { Event, EventEmitter, TreeDataProvider, TreeItem, TreeItemCollapsibleState, workspace } from "vscode";
 import extractCommands from "./parser";
 
 export default class TaskTreeDataProvider implements TreeDataProvider<TreeItem> {
+
+  private _onDidChangeTreeData: EventEmitter<TreeItem | undefined> = new EventEmitter<TreeItem | undefined>();
+  readonly onDidChangeTreeData: Event<TreeItem | undefined> = this._onDidChangeTreeData.event;
+
+  refresh(): void {
+    this._onDidChangeTreeData.fire(undefined);
+  }
 
   getTreeItem(item: TreeItem): TreeItem {
     return item;
@@ -10,7 +17,7 @@ export default class TaskTreeDataProvider implements TreeDataProvider<TreeItem> 
   async getChildren(): Promise<TreeItem[]> {
     const children: TreeItem[] = [];
 
-    if(workspace.workspaceFolders) {
+    if (workspace.workspaceFolders) {
       var filePath = `${workspace.workspaceFolders[0].uri.fsPath}/Makefile`;
       var commands = await extractCommands(filePath);
 
@@ -23,6 +30,17 @@ export default class TaskTreeDataProvider implements TreeDataProvider<TreeItem> 
 
     return children;
 
+  }
+
+  async makefileExists(): Promise<boolean> {
+    if (workspace.workspaceFolders) {
+      var filePath = `${workspace.workspaceFolders[0].uri.fsPath}/Makefile`;
+      return await workspace.fs.stat(workspace.workspaceFolders[0].uri.with({ path: filePath })).then(
+        () => true,
+        () => false
+      );
+    }
+    return false;
   }
 }
 
