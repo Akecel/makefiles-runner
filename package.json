@@ -39,7 +39,7 @@
                 "makefilesRunner.sortAlphabetically": {
                     "type": "boolean",
                     "default": false,
-                    "description": "Sort the makefile commands shown in the panel in alphabetical order, defaults to false.  When disabled, commands are shown in the same order as they appear within the makefile itself."
+                    "description": "Sorts the makefile commands shown in the panel in alphabetical order, defaults to false.  When disabled, commands are shown in the same order as they appear within the makefile itself."
                 },
                 "makefilesRunner.displayDescriptionCommentsInPanel": {
                     "type": "boolean",

@@ -16,6 +16,11 @@ Makefile allows you to simply run your makefile commands from the side bar panel
 
 <img src="https://raw.githubusercontent.com/Akecel/makefiles-runner/main/assets/doc/feature.gif" alt="Usage demo" />
 
+## Extension Settings
+
+- `sortAlphabetically`: Sorts the makefile commands shown in the panel in alphabetical order, defaults to false.  When disabled, commands are shown in the same order as they appear within the makefile itself.
+- `displayDescriptionCommentsInPanel"`: Optionally shows the convention-based comment about each command in the makefile as text next to each command in the panel, defaults to true.  Descriptions will be shown on-hover regardless of the value of this setting.
+
 ## Contributing
 
 Please read [CONTRIBUTING.md](https://github.com/Akecel/makefiles-runner/tree/main/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
