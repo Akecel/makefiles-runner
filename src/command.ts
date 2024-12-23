@@ -22,6 +22,6 @@ const sendTextToTerminal = async (text: string) => {
 
 const sendTextsToTerminal = async (texts: string[]) => {
   for (let i = 0; i < texts.length; i++) {
-    await sendTextToTerminal(texts[i]);
+    sendTextToTerminal(texts[i]);
   }
 };
