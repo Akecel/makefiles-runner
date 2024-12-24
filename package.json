@@ -45,6 +45,11 @@
                     "type": "boolean",
                     "default": true,
                     "description": "Optionally shows the convention-based comment about each command in the makefile as text next to each command in the panel, defaults to true.  Descriptions will be shown on-hover regardless of the value of this setting."
+                },
+                "makefilesRunner.alwaysCreateNewTerminal": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "When true creates a new terminal rather than reusing an existing one, defaults to false."
                 }
             }
 		}
@@ -68,6 +73,6 @@
 		"glob": "^7.1.6",
 		"mocha": "^10.1.0",
 		"typescript": "^4.0.2",
-		"vscode-test": "^1.4.0"
+		"@vscode/test-electron": "^1.4.0"
 	}
 }

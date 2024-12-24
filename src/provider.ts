@@ -1,4 +1,5 @@
 import { Disposable, Event, EventEmitter, TreeDataProvider, TreeItem, TreeItemCollapsibleState, workspace, WorkspaceConfiguration } from "vscode";
+import { configService } from './configService';
 import extractCommands from "./parser";
 
 export default class TaskTreeDataProvider implements TreeDataProvider<TreeItem>, Disposable {
@@ -7,15 +8,12 @@ export default class TaskTreeDataProvider implements TreeDataProvider<TreeItem>,
 
   private configChangeDisposable: Disposable;
 
+  private config = configService.getInstance();
+
   constructor() {
     // Listen for configuration changes and refresh the tree when they occur
     this.configChangeDisposable = workspace.onDidChangeConfiguration((e) => {
-      if (
-        e.affectsConfiguration("makefilesRunner.sortAlphabetically") ||
-        e.affectsConfiguration("makefilesRunner.displayDescriptionCommentsInPanel")
-      ) {
         this.refresh();
-      }
     });
   }
 
@@ -29,19 +27,18 @@ export default class TaskTreeDataProvider implements TreeDataProvider<TreeItem>,
 
   async getChildren(): Promise<TreeItem[]> {
     const children: TreeItem[] = [];
-    const config = this.getConfiguration();
 
     if (workspace.workspaceFolders) {
       const filePath = `${workspace.workspaceFolders[0].uri.fsPath}/Makefile`;
       let commands = await extractCommands(filePath);
 
-      if (config.sortAlphabetically) {
+      if (this.config.sortAlphabetically) {
         commands = commands.sort((a, b) => a.command.localeCompare(b.command));
       }
 
       if (commands.length !== 0) {
         for (const cmd of commands) {
-          children.push(new MakefileCommand(cmd.command, cmd.comment, config.displayDescriptionCommentsInPanel));
+          children.push(new MakefileCommand(cmd.command, cmd.comment, this.config.displayDescriptionCommentsInPanel));
         }
       }
     }
@@ -63,10 +60,6 @@ export default class TaskTreeDataProvider implements TreeDataProvider<TreeItem>,
   dispose(): void {
     // Clean up the configuration change listener
     this.configChangeDisposable.dispose();
-  }
-
-  private getConfiguration(): WorkspaceConfiguration {
-    return workspace.getConfiguration("makefilesRunner");
   }
 }
 
