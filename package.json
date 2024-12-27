@@ -34,29 +34,29 @@
 			]
 		},
 		"configuration": {
-            "title": "Makefiles Runner Settings",
-            "properties": {
-                "makefilesRunner.sortAlphabetically": {
-                    "type": "boolean",
-                    "default": false,
-                    "description": "Sorts the makefile commands shown in the panel in alphabetical order, defaults to false.  When disabled, commands are shown in the same order as they appear within the makefile itself."
-                },
-                "makefilesRunner.displayDescriptionCommentsInPanel": {
-                    "type": "boolean",
-                    "default": true,
-                    "description": "Optionally shows the convention-based comment about each command in the makefile as text next to each command in the panel, defaults to true.  Descriptions will be shown on-hover regardless of the value of this setting."
-                },
-                "makefilesRunner.alwaysCreateNewTerminal": {
-                    "type": "boolean",
-                    "default": false,
-                    "description": "When true creates a new terminal rather than reusing an existing one, defaults to false."
-                },
-                "makefilesRunner.reuseMatchingTerminal": {
-                    "type": "boolean",
-                    "default": false,
-                    "description": "When true reuses the first terminal with a matching command label, defaults to false.  Overrides alwaysCreateNewTerminal if both set true, so new terminals will only be created when running a command with no matching terminal."
-                }
-            }
+			"title": "Makefiles Runner Settings",
+			"properties": {
+				"makefilesRunner.sortAlphabetically": {
+					"type": "boolean",
+					"default": false,
+					"description": "Sorts the makefile commands shown in the panel in alphabetical order, defaults to false.  When disabled, commands are shown in the same order as they appear within the makefile itself."
+				},
+				"makefilesRunner.displayDescriptionCommentsInPanel": {
+					"type": "boolean",
+					"default": true,
+					"description": "Optionally shows the convention-based comment about each command in the makefile as text next to each command in the panel, defaults to true.  Descriptions will be shown on-hover regardless of the value of this setting."
+				},
+				"makefilesRunner.alwaysCreateNewTerminal": {
+					"type": "boolean",
+					"default": false,
+					"description": "When true creates a new terminal rather than reusing an existing one, defaults to false."
+				},
+				"makefilesRunner.reuseMatchingTerminal": {
+					"type": "boolean",
+					"default": false,
+					"description": "When true reuses the first terminal with a matching command label, defaults to false.  Overrides alwaysCreateNewTerminal if both set true, so new terminals will only be created when running a command with no matching terminal."
+				}
+			}
 		}
 	},
 	"scripts": {
