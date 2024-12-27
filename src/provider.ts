@@ -1,5 +1,5 @@
 import { Disposable, Event, EventEmitter, TreeDataProvider, TreeItem, TreeItemCollapsibleState, workspace, WorkspaceConfiguration } from "vscode";
-import { configService } from './configService';
+import { ConfigService } from './configService';
 import extractCommands from "./parser";
 
 export default class TaskTreeDataProvider implements TreeDataProvider<TreeItem>, Disposable {
@@ -8,7 +8,7 @@ export default class TaskTreeDataProvider implements TreeDataProvider<TreeItem>,
 
   private configChangeDisposable: Disposable;
 
-  private config = configService.getInstance();
+  private config = ConfigService.getInstance();
 
   constructor() {
     // Listen for configuration changes and refresh the tree when they occur

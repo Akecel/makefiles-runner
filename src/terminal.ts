@@ -35,6 +35,7 @@ export const selectTerminal = async (cmdName: string): Promise<vs.Terminal | und
 
   if (item) {
     if (item.terminal) {
+      item.terminal.show();
       return item.terminal;
     } else {
       // Create and return a new terminal

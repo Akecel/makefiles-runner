@@ -1,15 +1,16 @@
 // src/configuration/ConfigService.ts
 import * as vscode from 'vscode';
 
-export interface extensionConfig {
+export interface ExtensionConfig {
     sortAlphabetically: boolean;
     displayDescriptionCommentsInPanel: boolean;
     alwaysCreateNewTerminal: boolean;
+    reuseMatchingTerminal: boolean;
 }
 
-export class configService {
-    private static instance: configService;
-    private config: extensionConfig;
+export class ConfigService {
+    private static instance: ConfigService;
+    private config: ExtensionConfig;
     private readonly extensionName = 'makefilesRunner';
 
     private constructor() {
@@ -18,19 +19,20 @@ export class configService {
         vscode.workspace.onDidChangeConfiguration(this.handleConfigChange.bind(this));
     }
 
-    public static getInstance(): configService {
-        if (!configService.instance) {
-            configService.instance = new configService();
+    public static getInstance(): ConfigService {
+        if (!ConfigService.instance) {
+            ConfigService.instance = new ConfigService();
         }
-        return configService.instance;
+        return ConfigService.instance;
     }
 
-    private loadConfig(): extensionConfig {
+    private loadConfig(): ExtensionConfig {
         const config = vscode.workspace.getConfiguration(this.extensionName);
         return {
             sortAlphabetically: config.get<boolean>('sortAlphabetically', false),
             displayDescriptionCommentsInPanel: config.get<boolean>('displayDescriptionCommentsInPanel', true),
             alwaysCreateNewTerminal: config.get<boolean>('alwaysCreateNewTerminal', false),
+            reuseMatchingTerminal: config.get<boolean>('reuseMatchingTerminal', false)
         };
     }
 
@@ -51,5 +53,9 @@ export class configService {
 
     public get alwaysCreateNewTerminal(): boolean {
         return this.config.alwaysCreateNewTerminal;
+    }
+
+    public get reuseMatchingTerminal(): boolean {
+        return this.config.reuseMatchingTerminal;
     }
 }

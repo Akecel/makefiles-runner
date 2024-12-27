@@ -1,6 +1,6 @@
-import { workspace, Terminal } from "vscode";
+import { workspace, window, Terminal } from "vscode";
 import { createNewTerminal, ensureTerminalExists, selectTerminal } from "./terminal";
-import { configService } from './configService';
+import { ConfigService } from './configService';
 
 export const runMakeCommand = () => async (argument: string) => {
   if (workspace.workspaceFolders) {
@@ -12,23 +12,37 @@ export const runMakeCommand = () => async (argument: string) => {
 };
 
 const sendTextsToTerminal = async (argument: string, texts: string[]) => {
-  const config = configService.getInstance();
-  let terminal: Terminal | undefined;
-
-  if (config.alwaysCreateNewTerminal) {
-    terminal = await createNewTerminal(argument);
-  } else if (ensureTerminalExists()) {
-    terminal = await selectTerminal(argument) as Terminal;
-    if (!terminal) return; // Selection was canceled
-  } else {
-    return; // No terminal exists and new one is not configured to be created
+  var terminal = await determineTerminalToUse(argument);
+  if (!terminal)
+  {
+    return;
   }
-
   texts.forEach(text => sendTextToTerminal(terminal!, text));
 };
 
 const sendTextToTerminal = async (terminal: Terminal, text: string) => {
-    if (terminal) {
-      terminal.sendText(text);
-    }
+  terminal?.sendText(text);
 };
+
+const determineTerminalToUse = async(argument: string): Promise<Terminal | undefined> => {
+  const config = ConfigService.getInstance();
+  let terminal: Terminal | undefined;
+
+  if (config.reuseMatchingTerminal && window.terminals.length > 0) {
+    // Find a terminal with a matching name and show it if found.
+    terminal = window.terminals.find(t => t.name === argument);
+    terminal?.show();
+  } 
+  
+  if (!terminal) {
+    if (config.alwaysCreateNewTerminal) {
+      terminal = await createNewTerminal(argument);
+    } 
+    else if (ensureTerminalExists()) {
+      terminal = await selectTerminal(argument) as Terminal;
+    }
+  }
+
+  return terminal;
+}
+

@@ -50,6 +50,11 @@
                     "type": "boolean",
                     "default": false,
                     "description": "When true creates a new terminal rather than reusing an existing one, defaults to false."
+                },
+                "makefilesRunner.reuseMatchingTerminal": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "When true reuses the first terminal with a matching command label, defaults to false.  Overrides alwaysCreateNewTerminal if both set true, so new terminals will only be created when running a command with no matching terminal."
                 }
             }
 		}

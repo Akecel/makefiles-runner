@@ -6,7 +6,6 @@ let statusBarItem: StatusBarItem | undefined;
 const provider = new TaskTreeDataProvider();
 
 export const activate = async (context: ExtensionContext) => {
-
   context.subscriptions.push(
     commands.registerCommand("extension.runMakeCommand", runMakeCommand()),
     window.registerTreeDataProvider("makefiles-runner", provider)
