@@ -18,11 +18,7 @@ const sendTextsToTerminal = async (argument: string, texts: string[]) => {
     return;
   }
   terminal?.show();
-  texts.forEach(text => sendTextToTerminal(terminal!, text));
-};
-
-const sendTextToTerminal = async (terminal: Terminal, text: string) => {
-  terminal?.sendText(text);
+  texts.forEach(text => terminal?.sendText(text));
 };
 
 const determineTerminalToUse = async(argument: string): Promise<Terminal | undefined> => {
