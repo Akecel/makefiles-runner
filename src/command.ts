@@ -17,6 +17,7 @@ const sendTextsToTerminal = async (argument: string, texts: string[]) => {
   {
     return;
   }
+  terminal?.show();
   texts.forEach(text => sendTextToTerminal(terminal!, text));
 };
 
@@ -31,7 +32,6 @@ const determineTerminalToUse = async(argument: string): Promise<Terminal | undef
   if (config.reuseMatchingTerminal && window.terminals.length > 0) {
     // Find a terminal with a matching name and show it if found.
     terminal = window.terminals.find(t => t.name === argument);
-    terminal?.show();
   } 
   
   if (!terminal) {

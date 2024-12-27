@@ -9,7 +9,6 @@ export const ensureTerminalExists = (cmdName: string = 'Makefile Runner'): boole
 
 export const createNewTerminal = (cmdName: string): any => {
   let terminal = vs.window.createTerminal(cmdName);
-  terminal.show();
   return terminal;
 };
 
@@ -35,12 +34,10 @@ export const selectTerminal = async (cmdName: string): Promise<vs.Terminal | und
 
   if (item) {
     if (item.terminal) {
-      item.terminal.show();
       return item.terminal;
     } else {
       // Create and return a new terminal
       const newTerminal = createNewTerminal(cmdName);
-      newTerminal.show();
       return newTerminal;
     }
   }

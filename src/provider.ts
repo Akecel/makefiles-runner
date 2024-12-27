@@ -38,7 +38,7 @@ export default class TaskTreeDataProvider implements TreeDataProvider<TreeItem>,
 
       if (commands.length !== 0) {
         for (const cmd of commands) {
-          children.push(new MakefileCommand(cmd.command, cmd.comment, this.config.displayDescriptionCommentsInPanel));
+          children.push(new MakefileCommand(cmd.command, this.config.displayDescriptionCommentsInPanel ? cmd.comment : ''));
         }
       }
     }
@@ -67,10 +67,10 @@ type CommandName = string;
 type CommandComment = string;
 
 class MakefileCommand extends TreeItem {
-  constructor(commandName: CommandName, comment: CommandComment, displayDescription: boolean) {
+  constructor(commandName: CommandName, comment: CommandComment) {
     super(commandName, TreeItemCollapsibleState.None);
 
-    this.description = displayDescription ? (comment || "") : ""; // Show comment as the description in the VSCode tree.
+    this.description = comment || ""; // Show comment as the description in the VSCode tree.
     this.tooltip = comment || `Run "${commandName}"`; // Tooltip provides additional details.
 
     this.command = {
