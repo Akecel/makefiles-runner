@@ -40,5 +40,4 @@ const determineTerminalToUse = async(argument: string): Promise<Terminal | undef
   }
 
   return terminal;
-}
-
+};
