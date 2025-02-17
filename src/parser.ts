@@ -1,16 +1,15 @@
 import { workspace } from "vscode";
 
-type Content = string[];
-type CommandObject = { command: string; comment: string };
-export type Commands = CommandObject[];
-export const commandRegex = /^([a-zA-Z0-9_\-./]+):(?:\s*##\s*(.*))?$/;
+export type Command = { command: string; comment: string };
 
-const extractCommands = (filePath: string): Promise<Commands> =>
+const commandRegex = /^([a-zA-Z0-9_\-./]+):(?:\s*##\s*(.*))?$/;
+
+const extractCommands = (filePath: string): Promise<Command[]> =>
   getFileContent(filePath).then(buildCommands);
 
 export default extractCommands;
 
-const getFileContent = async (filePath: string): Promise<Content> => {
+const getFileContent = async (filePath: string): Promise<string[]> => {
   let document;
 
   try {
@@ -26,8 +25,8 @@ const getFileContent = async (filePath: string): Promise<Content> => {
   return content;
 };
 
-const buildCommands = (content: Content): Commands => {
-  const commands: Commands = [];
+export const buildCommands = (content: string[]): Command[] => {
+  const commands: Command[] = [];
 
   for (let i = 0; i < content.length; i++) {
     const line = content[i].trim();

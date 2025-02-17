@@ -1,20 +1,7 @@
+// Mostly AI-generated, but they seem to test what I asked it to test well enough for a starting point.
+
 import * as assert from "assert";
-import {Commands, commandRegex} from "../../parser";
-
-const buildCommands = (content: string[]): Commands => {
-  const commands: Commands = [];
-
-  for (const line of content) {
-    const match = line.trim().match(commandRegex);
-    if (match) {
-      commands.push({
-        command: match[1],
-        comment: match[2] || "", // Default to empty string if no comment
-      });
-    }
-  }
-  return commands;
-};
+import {buildCommands, Command} from "../../parser";
 
 suite("Makefile Command Extraction", () => {
   test("should extract a simple command without a comment", () => {
@@ -57,7 +44,7 @@ suite("Makefile Command Extraction", () => {
     assert.deepStrictEqual(buildCommands(input), expected);
   });
 
-  test("should handle targets with slashes (subdirectories)", () => {
+  test("should handle targets with slashes", () => {
     const input = ["test/integration: ## Runs integration tests"];
     const expected = [
       { command: "test/integration", comment: "Runs integration tests" },
@@ -102,7 +89,7 @@ suite("Makefile Command Extraction", () => {
 
   test("should not match dependency lists as targets", () => {
     const input = ["build: main.o utils.o"];
-    const expected: Commands = []; // No match because there's no `##` comment
+    const expected: Command[] = []; // No match because there's no `##` comment
     assert.deepStrictEqual(buildCommands(input), expected);
   });
 
