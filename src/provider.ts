@@ -1,10 +1,21 @@
-import { Event, EventEmitter, TreeDataProvider, TreeItem, TreeItemCollapsibleState, workspace } from "vscode";
+import { Disposable, Event, EventEmitter, TreeDataProvider, TreeItem, TreeItemCollapsibleState, workspace, WorkspaceConfiguration } from "vscode";
+import { ConfigService } from './configService';
 import extractCommands from "./parser";
 
-export default class TaskTreeDataProvider implements TreeDataProvider<TreeItem> {
-
+export default class TaskTreeDataProvider implements TreeDataProvider<TreeItem>, Disposable {
   private _onDidChangeTreeData: EventEmitter<TreeItem | undefined> = new EventEmitter<TreeItem | undefined>();
   readonly onDidChangeTreeData: Event<TreeItem | undefined> = this._onDidChangeTreeData.event;
+
+  private configChangeDisposable: Disposable;
+
+  private config = ConfigService.getInstance();
+
+  constructor() {
+    // Listen for configuration changes and refresh the tree when they occur
+    this.configChangeDisposable = workspace.onDidChangeConfiguration((e) => {
+        this.refresh();
+    });
+  }
 
   refresh(): void {
     this._onDidChangeTreeData.fire(undefined);
@@ -18,23 +29,26 @@ export default class TaskTreeDataProvider implements TreeDataProvider<TreeItem> 
     const children: TreeItem[] = [];
 
     if (workspace.workspaceFolders) {
-      var filePath = `${workspace.workspaceFolders[0].uri.fsPath}/Makefile`;
-      var commands = await extractCommands(filePath);
+      const filePath = `${workspace.workspaceFolders[0].uri.fsPath}/Makefile`;
+      let commands = await extractCommands(filePath);
+
+      if (this.config.sortAlphabetically) {
+        commands = commands.sort((a, b) => a.command.localeCompare(b.command));
+      }
 
       if (commands.length !== 0) {
-        for (let y = 0; y < commands.length; y++) {
-          children.push(new MakefileCommand(commands[y]));
+        for (const cmd of commands) {
+          children.push(new MakefileCommand(cmd.command, this.config.displayDescriptionCommentsInPanel ? cmd.comment : ''));
         }
       }
     }
 
     return children;
-
   }
 
   async makefileExists(): Promise<boolean> {
     if (workspace.workspaceFolders) {
-      var filePath = `${workspace.workspaceFolders[0].uri.fsPath}/Makefile`;
+      const filePath = `${workspace.workspaceFolders[0].uri.fsPath}/Makefile`;
       return await workspace.fs.stat(workspace.workspaceFolders[0].uri.with({ path: filePath })).then(
         () => true,
         () => false
@@ -42,20 +56,27 @@ export default class TaskTreeDataProvider implements TreeDataProvider<TreeItem> 
     }
     return false;
   }
+
+  dispose(): void {
+    // Clean up the configuration change listener
+    this.configChangeDisposable.dispose();
+  }
 }
 
-type Label = string;
-export type Argument = Label;
-export type FolderName = string;
+type CommandName = string;
+type CommandComment = string;
 
 class MakefileCommand extends TreeItem {
-  constructor(label: Label) {
-    super(label, TreeItemCollapsibleState.None);
+  constructor(commandName: CommandName, comment: CommandComment) {
+    super(commandName, TreeItemCollapsibleState.None);
+
+    this.description = comment || ""; // Show comment as the description in the VSCode tree.
+    this.tooltip = comment || `Run "${commandName}"`; // Tooltip provides additional details.
 
     this.command = {
       command: "extension.runMakeCommand",
       title: "Run Makefile Command",
-      arguments: [label]
+      arguments: [commandName] // Pass only the command name to the execute command.
     };
   }
 }
